@@ -7,9 +7,11 @@ import java.util.function.Predicate;
 public class Filter<A> implements Query<A,A> {
 
 	// TODO
+	private final Predicate<A> pred;
 
 	public Filter(Predicate<A> pred) {
 		// TODO
+		this.pred = pred;
 	}
 
 	@Override
@@ -20,11 +22,15 @@ public class Filter<A> implements Query<A,A> {
 	@Override
 	public void next(A item, Sink<A> sink) {
 		// TODO
+		if (pred.test(item)) {
+			sink.next(item);
+		}
 	}
 
 	@Override
 	public void end(Sink<A> sink) {
 		// TODO
+		sink.end();
 	}
 	
 }
